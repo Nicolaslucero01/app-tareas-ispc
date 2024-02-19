@@ -1,4 +1,5 @@
 package com.example.appispc;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
@@ -27,12 +28,7 @@ public class LoginActivity extends AppCompatActivity {
         usuarioDAO = new UsuarioDAO(this);
 
         Button loginButton = findViewById(R.id.buttonLogin);
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-            }
-        });
+        loginButton.setOnClickListener(v -> login());
     }
 
     private void login() {

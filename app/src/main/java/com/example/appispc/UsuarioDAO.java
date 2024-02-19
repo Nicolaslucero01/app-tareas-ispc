@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteDatabase;
 public class UsuarioDAO {
 
     private SQLiteDatabase database;
-    private DatabaseHelper dbHelper;
+    private final DatabaseHelper dbHelper;
 
     public UsuarioDAO(Context context) {
         dbHelper = new DatabaseHelper(context);
@@ -52,3 +52,5 @@ public class UsuarioDAO {
         return count > 0;
     }
 }
+
+

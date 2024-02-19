@@ -1,18 +1,11 @@
 package com.example.appispc;
-import android.os.Bundle;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-import androidx.appcompat.app.AppCompatActivity;
-import android.view.View;
-
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
 
 public class MainActivity extends AppCompatActivity {
@@ -32,11 +25,13 @@ public class MainActivity extends AppCompatActivity {
         usuarioDAO = new UsuarioDAO(this);
 
         Button registroButton = findViewById(R.id.buttonRegister);
-        registroButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                registrarUsuario();
-            }
+        registroButton.setOnClickListener(v -> registrarUsuario());
+
+        Button loginButton = findViewById(R.id.buttonLogin);
+        loginButton.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+
+            startActivity(intent);
         });
     }
 
@@ -48,19 +43,18 @@ public class MainActivity extends AppCompatActivity {
 
         if (usuarioDAO.usuarioExistente(username)) {
             Toast.makeText(this, "El nombre de usuario ya está registrado. Por favor, elige otro.", Toast.LENGTH_SHORT).show();
+        } else if (!validarPassword(password)) {
+            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres, una letra mayúscula, un número y un carácter especial", Toast.LENGTH_SHORT).show();
         } else {
             long id = usuarioDAO.agregarUsuario(username, password);
 
             if (id > 0) {
                 Toast.makeText(this, "¡Registro exitoso! Bienvenido " + username, Toast.LENGTH_SHORT).show();
 
-                // Crear un Intent para ir a la actividad LoginActivity
                 Intent intent = new Intent(this, LoginActivity.class);
 
-                // Iniciar la nueva actividad
                 startActivity(intent);
 
-                // Cerrar la actividad actual (RegistroActivity)
                 finish();
             } else {
                 Toast.makeText(this, "Error en el registro", Toast.LENGTH_SHORT).show();
@@ -69,5 +63,27 @@ public class MainActivity extends AppCompatActivity {
 
         usuarioDAO.cerrar();
     }
-}
 
+    private boolean validarPassword(String password) {
+        if (password.length() < 6) {
+            return false;
+        }
+
+        boolean contieneMayuscula = false;
+        boolean contieneNumero = false;
+        boolean contieneEspecial = false;
+        String caracteresEspeciales = "!@#$%^&*()_-+=[]{}|:;,.<>?";
+
+        for (char c : password.toCharArray()) {
+            if (Character.isUpperCase(c)) {
+                contieneMayuscula = true;
+            } else if (Character.isDigit(c)) {
+                contieneNumero = true;
+            } else if (caracteresEspeciales.contains(String.valueOf(c))) {
+                contieneEspecial = true;
+            }
+        }
+
+        return contieneMayuscula && contieneNumero && contieneEspecial;
+    }
+}
