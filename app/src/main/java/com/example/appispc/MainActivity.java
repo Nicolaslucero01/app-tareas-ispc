@@ -42,9 +42,12 @@ public class MainActivity extends AppCompatActivity {
         usuarioDAO.abrir();
 
         if (usuarioDAO.usuarioExistente(username)) {
-            Toast.makeText(this, "El nombre de usuario ya está registrado. Por favor, elige otro.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "El nombre de usuario ya está registrado. Por favor, elige otro.", Toast.LENGTH_SHORT)
+                    .show();
         } else if (!validarPassword(password)) {
-            Toast.makeText(this, "La contraseña debe tener al menos 6 caracteres, una letra mayúscula, un número y un carácter especial", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this,
+                    "La contraseña debe tener al menos 6 caracteres, una letra mayúscula, un número y un carácter especial",
+                    Toast.LENGTH_SHORT).show();
         } else {
             long id = usuarioDAO.agregarUsuario(username, password);
 
@@ -65,7 +68,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private boolean validarPassword(String password) {
-        if (password.length() < 6) {
+        if (password.length() < 8) {
             return false;
         }
 

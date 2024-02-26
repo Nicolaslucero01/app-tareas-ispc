@@ -1,5 +1,6 @@
 package com.example.appispc;
 
+import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
@@ -22,6 +23,18 @@ public class UsuarioDAO {
     public void cerrar() {
         dbHelper.close();
     }
+
+    public long obtenerIdPorUsername(String username) {
+        Cursor cursor = database.query(DatabaseHelper.TABLE_USERS, new String[]{DatabaseHelper.COLUMN_ID},
+                DatabaseHelper.COLUMN_USERNAME + " = ?", new String[]{username}, null, null, null);
+        if (cursor != null && cursor.moveToFirst()) {
+            @SuppressLint("Range") long id = cursor.getLong(cursor.getColumnIndex(DatabaseHelper.COLUMN_ID));
+            cursor.close();
+            return id;
+        }
+        return -1; // Retornar -1 si no se encuentra el usuario
+    }
+
 
     public long agregarUsuario(String username, String password) {
         ContentValues values = new ContentValues();
@@ -52,5 +65,3 @@ public class UsuarioDAO {
         return count > 0;
     }
 }
-
-

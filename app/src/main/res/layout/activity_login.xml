@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:padding="16dp">
+    android:padding="16dp"
+    android:background="@color/black02">
 
     <ImageView
         android:id="@+id/imageViewLogin"
@@ -21,10 +22,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/imageViewLogin"
         android:layout_marginTop="16dp"
-        android:hint="Nombre de usuario"
+        android:hint="Ingrese su nombre de usuario"
+        android:textColorHint="#939393"
         android:inputType="text"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
+        android:textColor="@color/white"
         android:autofillHints=""
         tools:ignore="HardcodedText" />
 
@@ -34,10 +36,11 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/editTextUsernameLogin"
         android:layout_marginTop="16dp"
-        android:hint="Contraseña"
+        android:hint="Ingrese su contraseña"
+        android:textColorHint="#939393"
         android:inputType="textPassword"
         android:minHeight="48dp"
-        android:textColorHint="#546E7A"
+        android:textColor="@color/white"
         android:autofillHints=""
         tools:ignore="HardcodedText" />
 

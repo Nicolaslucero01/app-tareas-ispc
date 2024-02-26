@@ -8,9 +8,6 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 
-
-
-
 public class LoginActivity extends AppCompatActivity {
 
     private EditText usernameEditText;
@@ -40,11 +37,16 @@ public class LoginActivity extends AppCompatActivity {
         if (usuarioDAO.validarCredenciales(username, password)) {
             Toast.makeText(this, "Inicio de sesión exitoso", Toast.LENGTH_SHORT).show();
 
+            // Obtener el ID del usuario
+            long usuarioId = usuarioDAO.obtenerIdPorUsername(username);
+
             // Crear un Intent para ir a la actividad HomeActivity
             Intent intent = new Intent(this, HomeActivity.class);
+            intent.putExtra("usuarioId", usuarioId);
             startActivity(intent);
             finish();
-        } else {
+        }
+        else {
             Toast.makeText(this, "Nombre de usuario o contraseña incorrectos", Toast.LENGTH_SHORT).show();
         }
 
