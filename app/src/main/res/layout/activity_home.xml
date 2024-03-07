@@ -10,20 +10,24 @@
         android:id="@+id/editTextTask"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Ingrese una tarea"
         android:layout_marginTop="10dp"
+        android:hint="@string/ingrese_una_tarea"
+        android:minHeight="48dp"
         android:textColor="@color/white"
         android:textColorHint="#939393"
-
-        />
+        android:inputType="TODO"
+        android:autofillHints=""
+        android:focusable="true"
+        tools:ignore="TextFields" />
 
     <Button
         android:id="@+id/buttonAddTask"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Agregar tarea"
+        android:text="@string/agregar_tarea"
         android:layout_below="@id/editTextTask"
         android:layout_alignParentEnd="true"
+        android:contentDescription="Agregar tarea"
         android:layout_marginEnd="16dp"
         />
 

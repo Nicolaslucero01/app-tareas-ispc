@@ -2,7 +2,6 @@ package com.example.appispc;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -25,8 +24,6 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
 
     private EditText editTextTask;
-    private Button buttonAddTask;
-    private ListView listViewTasks;
     private TaskAdapter adapter;
 
     private TareaDAO tareaDAO;
@@ -45,27 +42,24 @@ public class HomeActivity extends AppCompatActivity {
         usuarioId = getIntent().getLongExtra("usuarioId", -1);
 
         editTextTask = findViewById(R.id.editTextTask);
-        buttonAddTask = findViewById(R.id.buttonAddTask);
-        listViewTasks = findViewById(R.id.listViewTasks);
+        Button buttonAddTask = findViewById(R.id.buttonAddTask);
+        ListView listViewTasks = findViewById(R.id.listViewTasks);
 
-        taskList = cargarTareas(); // Carga tareas desde la base de datos
+        taskList = cargarTareas();
         adapter = new TaskAdapter(this, taskList);
         listViewTasks.setAdapter(adapter);
 
-        buttonAddTask.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String tituloTarea = editTextTask.getText().toString();
-                if (!tituloTarea.isEmpty()) {
-                    long taskId = tareaDAO.agregarTarea(tituloTarea, usuarioId);
-                    if (taskId > 0) {
-                        Tarea nuevaTarea = new Tarea(taskId, tituloTarea);
-                        taskList.add(nuevaTarea);
-                        adapter.notifyDataSetChanged();
-                        editTextTask.setText("");
-                    } else {
-                        Toast.makeText(HomeActivity.this, "Error al agregar tarea", Toast.LENGTH_SHORT).show();
-                    }
+        buttonAddTask.setOnClickListener(v -> {
+            String tituloTarea = editTextTask.getText().toString();
+            if (!tituloTarea.isEmpty()) {
+                long taskId = tareaDAO.agregarTarea(tituloTarea, usuarioId);
+                if (taskId > 0) {
+                    Tarea nuevaTarea = new Tarea(taskId, tituloTarea);
+                    taskList.add(nuevaTarea);
+                    adapter.notifyDataSetChanged();
+                    editTextTask.setText("");
+                } else {
+                    Toast.makeText(HomeActivity.this, "Error al agregar tarea", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -114,50 +108,36 @@ public class HomeActivity extends AppCompatActivity {
             taskText.setText(currentTask.getTitulo());
 
             Button editButton = listItem.findViewById(R.id.edit_button);
-            editButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tarea tarea = mTaskList.get(position);
-                    AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
-                    builder.setTitle("Editar tarea");
-                    final EditText input = new EditText(mContext);
-                    input.setText(tarea.getTitulo());
-                    builder.setView(input);
+            editButton.setOnClickListener(v -> {
+                Tarea tarea = mTaskList.get(position);
+                AlertDialog.Builder builder = new AlertDialog.Builder(mContext);
+                builder.setTitle("Editar tarea");
+                final EditText input = new EditText(mContext);
+                input.setText(tarea.getTitulo());
+                builder.setView(input);
 
-                    builder.setPositiveButton("Guardar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            String newTaskTitle = input.getText().toString();
-                            if (tareaDAO.actualizarTarea(tarea.getId(), newTaskTitle)) {
-                                tarea.setTitulo(newTaskTitle);
-                                notifyDataSetChanged();
-                                Toast.makeText(mContext, "Tarea actualizada", Toast.LENGTH_SHORT).show();
-                            }
-                        }
-                    });
+                builder.setPositiveButton("Guardar", (dialog, which) -> {
+                    String newTaskTitle = input.getText().toString();
+                    if (tareaDAO.actualizarTarea(tarea.getId(), newTaskTitle)) {
+                        tarea.setTitulo(newTaskTitle);
+                        notifyDataSetChanged();
+                        Toast.makeText(mContext, "Tarea actualizada", Toast.LENGTH_SHORT).show();
+                    }
+                });
 
-                    builder.setNegativeButton("Cancelar", new DialogInterface.OnClickListener() {
-                        @Override
-                        public void onClick(DialogInterface dialog, int which) {
-                            dialog.cancel();
-                        }
-                    });
+                builder.setNegativeButton("Cancelar", (dialog, which) -> dialog.cancel());
 
-                    builder.show();
-                }
+                builder.show();
             });
 
 
             Button deleteButton = listItem.findViewById(R.id.delete_button);
-            deleteButton.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Tarea tarea = mTaskList.get(position);
-                    if (tareaDAO.eliminarTarea(tarea.getId())) {
-                        mTaskList.remove(position);
-                        notifyDataSetChanged();
-                        Toast.makeText(mContext, "Tarea eliminada", Toast.LENGTH_SHORT).show();
-                    }
+            deleteButton.setOnClickListener(v -> {
+                Tarea tarea = mTaskList.get(position);
+                if (tareaDAO.eliminarTarea(tarea.getId())) {
+                    mTaskList.remove(position);
+                    notifyDataSetChanged();
+                    Toast.makeText(mContext, "Tarea eliminada", Toast.LENGTH_SHORT).show();
                 }
             });
 

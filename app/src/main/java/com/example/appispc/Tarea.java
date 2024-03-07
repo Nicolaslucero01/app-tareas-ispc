@@ -1,7 +1,7 @@
 package com.example.appispc;
 
 public class Tarea {
-    private long id;
+    private final long id;
     private String titulo;
 
     public Tarea(long id, String titulo) {

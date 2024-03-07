@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">AppISPC</string>
+    <string name="ingrese_una_contrese_a">Ingrese una contreseña</string>
+    <string name="ingrese_un_nombre_de_usuario">Ingrese un nombre de usuario</string>
+    <string name="registrarse">Registrarse</string>
+    <string name="iniciar_sesi_n">Iniciar sesión</string>
+    <string name="todo">TODO</string>
+    <string name="eliminar">Eliminar</string>
+    <string name="editar">Editar</string>
+    <string name="agregar_tarea">Agregar tarea</string>
+    <string name="ingrese_una_tarea">Ingrese una tarea</string>
 </resources>

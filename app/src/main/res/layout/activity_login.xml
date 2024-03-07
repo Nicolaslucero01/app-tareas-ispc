@@ -12,9 +12,9 @@
         android:layout_width="100dp"
         android:layout_height="100dp"
         android:layout_centerHorizontal="true"
+        android:contentDescription="Logo de la app"
         android:src="@drawable/my_image"
-        android:contentDescription="TODO"
-        tools:ignore="ContentDescription,HardcodedText" />
+        tools:ignore="ContentDescription,HardcodedText,ImageContrastCheck" />
 
     <EditText
         android:id="@+id/editTextUsernameLogin"
@@ -27,7 +27,8 @@
         android:inputType="text"
         android:minHeight="48dp"
         android:textColor="@color/white"
-        android:autofillHints=""
+        android:autofillHints="Ingresar nombre de usuario"
+        android:focusable="true"
         tools:ignore="HardcodedText" />
 
     <EditText
@@ -41,7 +42,7 @@
         android:inputType="textPassword"
         android:minHeight="48dp"
         android:textColor="@color/white"
-        android:autofillHints=""
+        android:autofillHints="Ingresar contraseña"
         tools:ignore="HardcodedText" />
 
     <Button
@@ -51,6 +52,7 @@
         android:layout_below="@id/editTextPasswordLogin"
         android:layout_marginTop="16dp"
         android:text="Iniciar sesión"
+        android:contentDescription="Botón para iniciar sesión"
         tools:ignore="HardcodedText" />
 
 </RelativeLayout>
