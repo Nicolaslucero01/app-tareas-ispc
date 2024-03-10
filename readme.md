@@ -15,3 +15,14 @@ Acá es donde se ve el CRUD de la APP, con las tareas ya registradas apareceran 
   -El segundo permitirá borrar la tarea y por consecuencia también se borrará de la BD.
 
 
+
+
+Documento IEE 830: https://docs.google.com/document/d/1XMnrQvM52bcGmkwgiWhSDxPDIWXYX70a/edit?usp=drive_link&ouid=103836396998328592163&rtpof=true&sd=true
+
+Documentación detallada de la App: https://docs.google.com/document/d/181szb_fJxiFlic-NnIs7mtIsrjPQ9_D2/edit?usp=drive_link&ouid=103836396998328592163&rtpof=true&sd=true
+
+Modelo de datos lógico (Modelo Relacional): https://docs.google.com/document/d/1EpkjsdzoGK8CPDKqWevtig7i4z7ebUdCnhs78WuCguM/edit?usp=drive_link
+
+Modelo de datos conceptual (DER): https://docs.google.com/document/d/175Csxu1wcTouaftDJNrH7cOyhkT3_uiCBmAYIAkQdb4/edit?usp=drive_link
+
+Archivo .zip para descargar la app: https://drive.google.com/file/d/1JzifEcre3oKeqMseGZ09KZg0KXmibgIY/view?usp=drive_link
