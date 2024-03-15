@@ -1,4 +1,4 @@
-*** Proyecto desarrollado para el módulo de APP MOVILES ***
+PROYECTO APP MOVILES
 
 A continuacion presentare mi trabajo en Andoid Studio con java, utilizando SQLite como base de datos.
 
